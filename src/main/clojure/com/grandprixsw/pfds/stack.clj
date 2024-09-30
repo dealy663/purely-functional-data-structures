@@ -3,14 +3,14 @@
 (defprotocol Stack
   (is-empty? [this])
   (con-s [this x])
-  (hd [this])
-  (tl [this]))
+  (head [this])
+  (tail [this]))
 
-(deftype stack-native [head tail] Stack
-         (is-empty? [this] (nil? head))
+(deftype stack-native [head_ tail_] Stack
+         (is-empty? [this] (nil? head_))
          (con-s [this x] (stack-native. x this))
-         (hd [this] head)
-         (tl [this] tail)
+         (head [this] head_)
+         (tail [this] tail_)
 
          #_(stk-prn [this]
            (print head)))
