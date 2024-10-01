@@ -9,11 +9,17 @@
 (deftype stack-native [head_ tail_] Stack
          (is-empty? [this] (nil? head_))
          (con-s [this x] (stack-native. x this))
-         (head [this] head_)
-         (tail [this] tail_)
+         (head [this]
+           (if-not (is-empty? this)
+             head_
+             (throw (Exception. "Can't operate on empty stack"))))
+         (tail [this]
+           (if (is-empty? this)
+             (throw (Exception. "Can't operate on empty stack"))
+             tail_))
 
          #_(stk-prn [this]
-           (print head)))
+                    (print head)))
 
 (def empty-stack nil)
 
