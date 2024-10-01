@@ -19,3 +19,4 @@
 
 (defn new-stack []
   (stack-native. empty-stack empty-stack))
+
