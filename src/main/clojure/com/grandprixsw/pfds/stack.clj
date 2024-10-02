@@ -26,3 +26,11 @@
 (defn new-stack []
   (stack-native. empty-stack empty-stack))
 
+(defn show-stack [s]
+  (loop [stk s
+         lst []]
+    (if (is-empty? stk)
+      lst
+      (recur (tail stk) (conj lst (head stk))))))
+
+
