@@ -16,10 +16,7 @@
          (tail [this]
            (if (is-empty? this)
              (throw (Exception. "Can't operate on empty stack"))
-             tail_))
-
-         #_(stk-prn [this]
-                    (print head)))
+             tail_)))
 
 (def empty-stack nil)
 

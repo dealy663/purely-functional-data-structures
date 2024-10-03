@@ -8,7 +8,8 @@
 
     (let [s0 (stk/new-stack)
           s1 (stk/con-s s0 :foo)
-          s2 (stk/con-s s1 :biz)]
+          s2 (stk/con-s s1 :biz)
+          s3 (stk/con-s s2 :bar)]
       (is (false? (stk/is-empty? s1))
           "s1 should be non-empty")
       (is (= :foo (stk/head s1)))
@@ -18,5 +19,7 @@
       (is (thrown? java.lang.Exception (stk/head s0))
           "empty stack should throw exception")
       (is (thrown? java.lang.Exception (stk/tail s0))
-          "empty stack should throw an exception"))))
+          "empty stack should throw an exception")
+      (is (= s1 (->> s3 stk/tail stk/tail))
+          "The stack s1 should be the second tail in s3"))))
 
