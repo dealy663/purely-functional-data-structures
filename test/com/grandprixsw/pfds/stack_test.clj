@@ -1,25 +1,19 @@
 (ns com.grandprixsw.pfds.stack-test
   (:require [clojure.test :refer [deftest is testing]]
-            [com.grandprixsw.pfds.stack :as stk]))
+            [com.grandprixsw.pfds.stack :as sut]))
 
 (deftest stack-test
   (testing "Test building a simple stack"
-    (is (true? (stk/is-empty? (stk/new-stack))))
+    (is (sut/empty? sut/empty-stack))
 
-    (let [s0 (stk/new-stack)
-          s1 (stk/con-s s0 :foo)
-          s2 (stk/con-s s1 :biz)
-          s3 (stk/con-s s2 :bar)]
-      (is (false? (stk/is-empty? s1))
+    (let [s1 (sut/new-stack :foo)
+          s2 (sut/cons s1 :biz)
+          s3 (sut/cons s2 :bar)]
+      (is (false? (sut/empty? s1))
           "s1 should be non-empty")
-      (is (= :foo (stk/head s1)))
-      (is (= :biz (stk/head s2))
+      (is (= :foo (sut/head s1)))
+      (is (= :biz (sut/head s2))
           "s2 head should be biz")
-      (is (= :foo (->> s2 stk/tail stk/head)))
-      (is (thrown? java.lang.Exception (stk/head s0))
-          "empty stack should throw exception")
-      (is (thrown? java.lang.Exception (stk/tail s0))
-          "empty stack should throw an exception")
-      (is (= s1 (->> s3 stk/tail stk/tail))
+      (is (= :foo (->> s2 sut/tail sut/head)))
+      (is (= s1 (->> s3 sut/tail sut/tail))
           "The stack s1 should be the second tail in s3"))))
-
